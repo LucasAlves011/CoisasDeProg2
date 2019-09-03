@@ -20,7 +20,7 @@ public class DateUtils {
 			for(int i=0;i<=DataMenor.until(b,ChronoUnit.DAYS);i++) {
 
 				if(DataMenor.plusDays(i).getDayOfWeek() == DayOfWeek.SATURDAY ||
-						DataMenor.plusDays(i).getDayOfWeek() == DayOfWeek.MONDAY)	{
+						DataMenor.plusDays(i).getDayOfWeek() == DayOfWeek.SUNDAY)	{
 				}
 				else
 					retorno++;
