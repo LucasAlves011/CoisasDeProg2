@@ -30,9 +30,30 @@ public class Pessoa {
 		if(this.checar(name) == false) {
 			this.setNome("default");			
 		}
-		this.setNome(name);
-		this.idade = Period.between(dataNascimento, LocalDate.now()).getYears();	
+		else
+			this.setNome(name);
 		
+		this.idade = setarIdade(dataNascimento);	
+		
+		if(this.checarCpf(cpf)) {
+			this.setCpf(cpf);
+		}
+		else 
+			this.setCpf("00000000000");
+	}
+
+	public Pessoa(String name,int dia,int mes,int ano,String cpf) {
+
+		LocalDate dataNascimento = LocalDate.of(ano, mes, dia);
+
+		if(this.checar(name) == false) {
+			this.setNome("default");			
+		}
+		else
+			this.setNome(name);
+		
+		this.idade = setarIdade(dataNascimento);	
+
 		if(this.checarCpf(cpf)) {
 			this.setCpf(cpf);
 		}
@@ -54,17 +75,31 @@ public class Pessoa {
 		return false;
 	}	
 	
+	public int setarIdade(LocalDate data) {
+		if(data.isAfter(LocalDate.now())) {
+			return 0;
+		}		
+		return Period.between(data, LocalDate.now()).getYears();
+	}
+	
 	public boolean checarCpf(String cpf) {
 
 		if(cpf.length() < 11 || cpf.length() >11) {
 			return false;
 		}
 		for (int i = 0; i < 11; i++) {
-			if(cpf.codePointAt(i)< 30 || cpf.codePointAt(i) > 39) {
+			if(cpf.codePointAt(i)< 48 || cpf.codePointAt(i) > 57) {
 				return false;
 			}
 		}
 		return true;		
 	}
+	@Override
+	public String toString() {
+		return "Pessoa [nome=" + nome + 
+				"," + idade + "," + cpf + "]";
+	}
+	
+	
 	
 }
